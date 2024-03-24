@@ -1,11 +1,18 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const cors = require('cors'); // Import the cors package
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: "*", // Allow all origins
+        methods: ["GET", "POST"] // Allow GET and POST requests
+    }
+});
 
+app.use(cors()); // Use cors middleware
 app.use(express.static('public'));
 app.use(express.json());
 
