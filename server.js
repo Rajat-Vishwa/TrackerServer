@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.post('/update-location', (req, res) => {
     io.emit('locationUpdate', req.body);
-    res.status(200).send('Location updated');
+    res.status(200).send('Location updated : ' + JSON.stringify(req.body));
 });
 
 io.on('connection', (socket) => {
